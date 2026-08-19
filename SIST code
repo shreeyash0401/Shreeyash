@@ -1,0 +1,68 @@
+class common
+{
+    static String PM="Modi jii";
+}
+class tamilnadu
+{
+    static String ST_Name="tamilnadu";
+    static String CM="Thalapathy";
+    String Dt_name;
+    int NOP;
+    public void set_dim(String a,int b)
+    {
+        Dt_name=a;
+        NOP=b;
+    }
+    public void display()
+    {
+        System.out.println("1.PM:"+common.PM);
+        System.out.println("2.CM:"+CM);
+        System.out.println("3.State Name:"+ST_Name);
+        System.out.println("4.District Name:"+Dt_name);
+        System.out.println("5.No.OF Population:"+NOP);
+        
+        
+    }
+}
+class andra
+{
+    static String ST_Name="Andra pradesh";
+    static String CM="Chandra";
+    String Dt_name;
+    int NOP;
+    public void set_dim(String a,int b)
+    {
+        Dt_name=a;
+        NOP=b;
+    }
+    public void display()
+    {
+        System.out.println("1.PM:"+common.PM);
+        System.out.println("2.CM:"+CM);
+        System.out.println("3.State Name:"+ST_Name);
+        System.out.println("4.District Name:"+Dt_name);
+        System.out.println("5.No.OF Population:"+NOP);
+        
+        
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	   tamilnadu a=new tamilnadu();
+	   tamilnadu b=new tamilnadu();
+	   andra a1=new andra();
+	   andra b1=new andra();
+	   andra c1=new andra();
+	   a.set_dim("Chennai",100000);
+	   b.set_dim("Theni",20000);
+	   a.display();
+	   b.display();
+	   System.out.println("------------------");
+	   a1.set_dim("Tada",120000);
+	   b1.set_dim("Tirupati",40000);
+	   a1.display();
+	   b1.display();
+	   
+		}
+}
