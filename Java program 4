@@ -1,0 +1,39 @@
+import java.util.Scanner;
+public class Main
+{
+    public static void main(String[]args)
+    {
+        Scanner a = new Scanner(System.in);
+        System.out.println("Enter Your String:");
+        String w=a.nextLine();
+        int uppercaseCount = 0;
+        int lowercaseCount = 0;
+        int Digit = 0;
+        int Special = 0;
+        for(char b:w.toCharArray())
+        {
+            if(Character.isUpperCase(b))
+            {
+                uppercaseCount++;
+            }
+            else if(Character.isLowerCase(b))
+            {
+                lowercaseCount++;
+            }
+            else if(Character.isDigit(b))
+            {
+                Digit++; 
+            }
+            else
+            {
+                Special++;
+            }
+        }
+        System.out.println("Uppercase Letters:"+uppercaseCount);
+        System.out.println("Lowercase Letters:"+lowercaseCount);
+        System.out.println("Digits:"+Digit);
+        System.out.println("Special Letters:"+Special);
+    }
+}
+
+
