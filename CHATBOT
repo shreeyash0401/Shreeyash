@@ -1,0 +1,24 @@
+from groq import Groq
+
+client = Groq(api_key="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")
+
+while True:
+    user_message = input("Yash: ")
+
+    if user_message.lower() == "bye":
+        print("Bot: Goodbye!")
+        break
+
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=[
+            {
+                "role": "user",
+                "content": user_message
+            }
+        ]
+    )
+
+    bot_reply = response.choices[0].message.content
+
+    print("Bot:", bot_reply)
