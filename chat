@@ -1,0 +1,110 @@
+from groq import Groq
+
+client = Groq(
+    api_key="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"
+)
+
+# --------------------------------
+# ROLES ARRAY
+# --------------------------------
+
+roles = [
+    {
+        "id": 1,
+        "name": "customer_support",
+        "description": """
+        You are a customer support assistant.
+        Help customers with products, orders, delivery,
+        returns, refunds and warranty.
+        Be polite and professional.
+        """
+    },
+
+    {
+        "id": 2,
+        "name": "teacher",
+        "description": """
+        You are an AI teacher.
+        Explain concepts in simple language.
+        Give examples and step-by-step explanations.
+        """
+    },
+
+    {
+        "id": 3,
+        "name": "programmer",
+        "description": """
+        You are an expert Python programmer.
+        Help users write, debug and explain Python code.
+        Provide clean and simple solutions.
+        """
+    }
+]
+
+
+# --------------------------------
+# SELECT ROLE
+# --------------------------------
+
+print("Available Roles:")
+for role in roles:
+    print(f"{role['id']}. {role['name'].replace('_', ' ').title()}")
+
+while True:
+    try:
+        role_choice_input = input("\nSelect Role (enter the number): ")
+        role_choice = int(role_choice_input)
+        if 1 <= role_choice <= len(roles):
+            selected_role = roles[role_choice - 1]
+            print("\nSelected Role:", selected_role["name"].replace('_', ' ').title())
+            break
+        else:
+            print(f"Invalid input. Please enter a number between 1 and {len(roles)}.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
+
+# --------------------------------
+# CONVERSATION CONTEXT
+# --------------------------------
+
+messages = [
+    {
+        "role": "system",
+        "content": selected_role["description"]
+    }
+]
+
+
+# --------------------------------
+# CHAT
+# --------------------------------
+
+while True:
+
+    user_input = input("\nYou: ")
+
+    if user_input.lower() in ["exit", "quit", "bye"]:
+        print("AI: Goodbye!")
+        break
+
+    messages.append({
+        "role": "user",
+        "content": user_input
+    })
+
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=messages,
+        temperature=0.5
+    )
+
+    answer = response.choices[0].message.content
+
+    print("\nAI:", answer)
+
+    messages.append({
+        "role": "assistant",
+        "content": answer
+    })
+i c
