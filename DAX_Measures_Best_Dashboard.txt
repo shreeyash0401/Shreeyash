@@ -1,0 +1,65 @@
+-- IT HELPDESK & TICKET RESOLUTION ANALYTICS
+-- Table: 'Helpdesk Tickets'
+
+Total Tickets = COUNTROWS('Helpdesk Tickets')
+
+Resolved Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Status] = "Resolved")
+
+Open Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Status] = "Open")
+
+In Progress Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Status] = "In Progress")
+
+Pending Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Status] = "Pending User")
+
+High Priority Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Priority] IN {"High","Critical"})
+
+Critical Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Priority] = "Critical")
+
+SLA Met Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[SLA Status] = "Met")
+
+SLA Breached Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[SLA Status] = "Breached")
+
+SLA Compliance % =
+DIVIDE([SLA Met Tickets], [Resolved Tickets], 0)
+
+SLA Breach % =
+DIVIDE([SLA Breached Tickets], [Resolved Tickets], 0)
+
+Average Resolution Time =
+AVERAGE('Helpdesk Tickets'[Resolution Time Hours])
+
+Average Response Time =
+AVERAGE('Helpdesk Tickets'[Response Time Hours])
+
+Reopened Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Reopened] = "Yes")
+
+Reopen Rate % =
+DIVIDE([Reopened Tickets], [Resolved Tickets], 0)
+
+Resolution Rate % =
+DIVIDE([Resolved Tickets], [Total Tickets], 0)
+
+Escalated Tickets =
+CALCULATE([Total Tickets], 'Helpdesk Tickets'[Escalated] = "Yes")
+
+Average CSAT =
+AVERAGE('Helpdesk Tickets'[Customer Satisfaction])
+
+Tickets Per Technician =
+DIVIDE([Total Tickets], DISTINCTCOUNT('Helpdesk Tickets'[Technician]), 0)
+
+-- Optional Date table measures
+Tickets Previous Month =
+CALCULATE([Total Tickets], DATEADD('Calendar'[Date], -1, MONTH))
+
+MoM Ticket Change % =
+DIVIDE([Total Tickets] - [Tickets Previous Month], [Tickets Previous Month], 0)
